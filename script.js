@@ -20,9 +20,9 @@ function toggleMenu() {
 
 hamburger.addEventListener("click", toggleMenu);
 
-// Adjust nav link hrefs dynamically if not on portfolio.html
+// Adjust nav link hrefs dynamically if not on index.html
 const currentPage = window.location.pathname;
-const prefix = currentPage.includes("portfolio.html") ? "" : "portfolio.html";
+const prefix = currentPage.includes("index.html") || currentPage.endsWith("/") ? "" : "index.html";
 
 document.querySelectorAll(".nav-links a, .footer-nav a,.logo a").forEach(link => {
   const href = link.getAttribute("href");

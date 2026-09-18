@@ -7,8 +7,8 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open portfolio.html",
-            "file": "c:\\Users\\User\\git\\Portfolio\\portfolio.html"
+            "name": "Open index.html",
+            "file": "c:\\Users\\User\\git\\Portfolio\\index.html"
         }
     ]
 }
