@@ -147,8 +147,8 @@ setInterval(() => {
 // Show the first slide initially
 showSlide(0);
 
-// Form validation for contact form
- function validateForm(event) {
+// Form validation and email sending via EmailJS
+function validateForm(event) {
   event.preventDefault();
 
   const name = document.getElementById('name').value.trim();
@@ -171,9 +171,30 @@ showSlide(0);
     return false;
   }
 
-  alert('Message sent successfully!');
-  document.querySelector('.contact-form').reset(); // Clear the form fields
-  return true;
+  const form = document.querySelector('.contact-form');
+  const submitBtn = form.querySelector('.submit-btn');
+
+  // Show loading state
+  submitBtn.textContent = 'Sending...';
+  submitBtn.disabled = true;
+
+  emailjs.sendForm(
+    'service_1r7w2ah',   
+    'template_tp4bq5z',  
+    form
+  ).then(() => {
+    alert('Message sent successfully! I\'ll get back to you soon.');
+    form.reset();
+    submitBtn.textContent = 'Submit';
+    submitBtn.disabled = false;
+  }).catch((error) => {
+    console.error('EmailJS error:', error);
+    alert('Oops! Something went wrong. Please try again later.');
+    submitBtn.textContent = 'Submit';
+    submitBtn.disabled = false;
+  });
+
+  return false;
 }
 
 
