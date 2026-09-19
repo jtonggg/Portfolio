@@ -719,6 +719,7 @@ footer {
 /* Expanded details — hidden by default, smooth reveal on hover */
 .competition-details {
   display: flex;
+  flex-wrap: wrap;          /* safety net: wraps if items can't fit */
   gap: 1.5rem;
   align-items: flex-start;
   padding: 0 2rem;
@@ -730,20 +731,21 @@ footer {
 
 .competition-card:hover .competition-details,
 .competition-card.active .competition-details {
-  max-height: 400px;
+  max-height: 700px;        /* tall enough for wrapped/stacked layout */
   opacity: 1;
   padding: 0 2rem 1.8rem;
 }
 
-/* Competition image */
+/* Competition image — responsive, never overflows */
 .competition-img {
-  width: 260px;
-  height: 180px;
+  width: min(240px, 40%);   /* at most 240px, but shrinks to 40% on narrow cards */
+  min-width: 140px;
+  height: 170px;
   object-fit: cover;
   border-radius: 0.8rem;
-  flex-shrink: 0;
   background-color: #444;
   border: 1px solid #555;
+  flex-shrink: 1;           /* allow shrinking when needed */
 }
 
 /* Right side text + link */
@@ -752,6 +754,7 @@ footer {
   flex-direction: column;
   justify-content: space-between;
   flex: 1;
+  min-width: 200px;         /* triggers wrap before text gets squashed */
   text-align: left;
   gap: 1rem;
 }
@@ -796,31 +799,26 @@ footer {
   color: #fff;
 }
 
-/* Desktop: cap image so it never overflows */
-.competition-img {
-  max-width: 100%;
-}
-
-/* Tablet / mobile: stack image above text */
-@media (max-width: 850px) {
-  .competition-details {
-    flex-direction: column;
-  }
-
+/* Mobile: fully stack image above text */
+@media (max-width: 600px) {
   .competition-img {
     width: 100%;
-    height: 200px;
-    object-fit: cover;
+    min-width: unset;
+    height: 180px;
+  }
+
+  .competition-desc {
+    min-width: unset;
+    width: 100%;
   }
 
   .competition-summary {
-    padding: 1.2rem 1.2rem;
+    padding: 1rem;
   }
 
   .competition-card:hover .competition-details,
   .competition-card.active .competition-details {
-    max-height: 600px;
-    padding: 0 1.2rem 1.5rem;
+    padding: 0 1rem 1.2rem;
   }
 }
 
