@@ -730,15 +730,15 @@ footer {
 
 .competition-card:hover .competition-details,
 .competition-card.active .competition-details {
-  max-height: 400px;
+  max-height: 300px;
   opacity: 1;
   padding: 0 2rem 1.8rem;
 }
 
 /* Competition image */
 .competition-img {
-  width: 260px;
-  height: 180px;
+  width: 180px;
+  height: 120px;
   object-fit: cover;
   border-radius: 0.8rem;
   flex-shrink: 0;

@@ -199,30 +199,118 @@ function validateForm(event) {
 
 
 
-  // interactive star button
+
+// =====================
+// Star Button — Enhanced
+// =====================
 const starButton = document.getElementById('star-button');
 const starPopup = document.getElementById('star-popup');
 let starCount = 0;
 
-starButton.addEventListener('click', () => {
-  starCount++;
-  starPopup.textContent = `+${starCount}`;
+// Spawn burst particles from click position
+function spawnParticles(cx, cy) {
+  const total = 10;
+  for (let i = 0; i < total; i++) {
+    const p = document.createElement('span');
+    p.classList.add('star-particle');
+    p.textContent = '⭐';
 
-  // Trigger the CSS animation
-  starPopup.classList.remove('show'); 
-  void starPopup.offsetWidth; 
+    const angle = (i / total) * 360;
+    const dist = 55 + Math.random() * 55;
+    p.style.left = cx + 'px';
+    p.style.top  = cy + 'px';
+    p.style.setProperty('--dx', Math.cos(angle * Math.PI / 180) * dist + 'px');
+    p.style.setProperty('--dy', Math.sin(angle * Math.PI / 180) * dist + 'px');
+    p.style.animationDelay = (Math.random() * 0.08) + 's';
+
+    document.body.appendChild(p);
+    p.addEventListener('animationend', () => p.remove());
+  }
+}
+
+// Slide-in toast instead of alert
+function showToast(msg, emoji = '🌟') {
+  const toast = document.createElement('div');
+  toast.classList.add('star-toast');
+  toast.innerHTML = `<span class="toast-emoji">${emoji}</span><span>${msg}</span>`;
+  document.body.appendChild(toast);
+  setTimeout(() => toast.classList.add('show'), 10);
+  setTimeout(() => {
+    toast.classList.remove('show');
+    setTimeout(() => toast.remove(), 400);
+  }, 3200);
+}
+
+// Full-screen colour flash
+function milestoneFlash(color) {
+  const flash = document.createElement('div');
+  flash.classList.add('milestone-flash');
+  flash.style.background = color;
+  document.body.appendChild(flash);
+  setTimeout(() => flash.remove(), 700);
+}
+
+// Update button glow level based on count
+function updateStarLevel() {
+  starButton.classList.remove('star-lvl-1','star-lvl-2','star-lvl-3','star-lvl-4');
+  if      (starCount >= 200) starButton.classList.add('star-lvl-4');
+  else if (starCount >= 100) starButton.classList.add('star-lvl-3');
+  else if (starCount >=  50) starButton.classList.add('star-lvl-2');
+  else if (starCount >=  10) starButton.classList.add('star-lvl-1');
+}
+
+starButton.addEventListener('click', (e) => {
+  starCount++;
+
+  // Floating +N popup
+  starPopup.textContent = `+${starCount}`;
+  starPopup.classList.remove('show');
+  void starPopup.offsetWidth;
   starPopup.classList.add('show');
 
-  // Show messages at certain milestones
-if (starCount === 10) {
-  alert("Keep going... or don't. I'm just a button.");
-} else if (starCount === 50) {
-  alert("Halfway to madness. Or greatness. Hard to tell.");
-} else if (starCount === 100) {
-  alert("100 stars. You deserve a trophy... or a therapist. 🏆😅");
-} else if (starCount === 200) {
-  alert("🌟 My developer said this would never happen.");
-}
-});
-  
+  // Particle burst from button centre
+  const r = starButton.getBoundingClientRect();
+  spawnParticles(r.left + r.width / 2, r.top + r.height / 2);
 
+  // Button bounce
+  starButton.classList.remove('star-bounce');
+  void starButton.offsetWidth;
+  starButton.classList.add('star-bounce');
+
+  // Progressive glow
+  updateStarLevel();
+
+  // Milestone reactions — no more boring alerts!
+  if (starCount === 10) {
+    milestoneFlash('rgba(255,215,0,0.15)');
+    showToast("You found the secret star! 🤫", "🥇");
+  } else if (starCount === 50) {
+    milestoneFlash('rgba(187,134,252,0.2)');
+    showToast("50 stars... are you okay?? 😂", "💜");
+  } else if (starCount === 100) {
+    milestoneFlash('rgba(255,0,128,0.2)');
+    showToast("100 STARS. Absolute respect. 🫡", "🏆");
+  } else if (starCount === 200) {
+    milestoneFlash('rgba(0,255,200,0.2)');
+    showToast("My developer said this would NEVER happen 😭", "🌈");
+  }
+});
+
+
+// Competition cards — tap to expand (mobile) / accordion behaviour
+document.querySelectorAll('.competition-card').forEach(card => {
+  card.addEventListener('click', (e) => {
+    // Don't toggle if the user clicked a link inside the card
+    if (e.target.closest('.competition-link')) return;
+
+    const isActive = card.classList.contains('active');
+
+    // Close all cards first (accordion — only one open at a time)
+    document.querySelectorAll('.competition-card').forEach(c => c.classList.remove('active'));
+
+    // If this card wasn't already open, open it
+    if (!isActive) {
+      card.classList.add('active');
+    }
+  });
+});

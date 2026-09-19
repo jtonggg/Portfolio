@@ -1,0 +1,472 @@
+/* ============================================================
+   RETRO THEME OVERRIDE — Neo-Retro 8-bit x Flowy Neon
+   To revert: remove the <link> to this file in index.html
+   ============================================================ */
+
+:root {
+  --rc: #00e5ff;
+  --rm: #ff00cc;
+  --ry: #c8ff00;
+  --rp: #bb86fc;
+  --rbg: #07000f;
+  --rbg2: #0d0020;
+}
+
+/* Body — pixel grid */
+body {
+  background-color: var(--rbg);
+  background-image:
+    linear-gradient(rgba(0,229,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,229,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Cursor — retro square */
+.follower {
+  border: 2px solid var(--rc);
+  border-radius: 0;
+  box-shadow: 0 0 10px var(--rc), 0 0 20px rgba(0,229,255,0.3);
+  width: 14px;
+  height: 14px;
+}
+
+/* ── Navbar ── */
+.navbar {
+  background-color: var(--rbg);
+  border-bottom: 3px solid var(--rc);
+  box-shadow: 0 0 20px rgba(0,229,255,0.25), 0 4px 30px rgba(0,0,0,0.8);
+}
+
+.navbar .logo a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.1rem;
+  color: var(--rc);
+  text-shadow: 0 0 10px var(--rc), 0 0 30px rgba(0,229,255,0.4);
+}
+
+.navbar .logo:hover { font-size: 1.1rem; }
+
+.navbar .logo:hover a {
+  color: var(--rm);
+  text-shadow: 0 0 10px var(--rm), 0 0 30px rgba(255,0,204,0.4);
+}
+
+.nav-links li a {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.04em;
+  color: var(--rc);
+}
+
+.nav-links li a:hover {
+  color: var(--ry);
+  text-shadow: 0 0 8px var(--ry);
+}
+
+/* ── Hero ── */
+#aboutme { position: relative; overflow: hidden; }
+
+#aboutme::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 3px,
+    rgba(0,0,0,0.1) 3px, rgba(0,0,0,0.1) 4px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+#aboutme .about-container { position: relative; z-index: 2; }
+
+.intro-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  color: var(--rm);
+  text-shadow: 0 0 10px var(--rm);
+  letter-spacing: 0.1em;
+}
+
+.intro-text::after {
+  content: '_';
+  animation: blink 1s step-end infinite;
+  color: var(--rc);
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0; }
+}
+
+/* Flowing neon gradient name */
+.name-text {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 2rem;
+  line-height: 1.7;
+  background: linear-gradient(90deg, var(--rc), var(--rm), var(--ry), var(--rc));
+  background-size: 300% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: flowName 5s linear infinite;
+}
+
+@keyframes flowName {
+  0%   { background-position: 0%   50%; }
+  100% { background-position: 300% 50%; }
+}
+
+.about-text p { color: #cccccc; }
+
+.text-highlight {
+  color: var(--rc);
+  -webkit-text-fill-color: var(--rc);
+  text-shadow: 0 0 10px var(--rc);
+}
+
+/* Profile image — neon double border, pixel square */
+.profile-image img {
+  border-radius: 0;
+  border: 3px solid var(--rc);
+  box-shadow:
+    0 0 0 3px var(--rbg),
+    0 0 0 6px var(--rm),
+    0 0 25px var(--rc),
+    0 0 60px rgba(0,229,255,0.2);
+}
+
+.profile-image img:hover {
+  box-shadow:
+    0 0 0 3px var(--rbg),
+    0 0 0 6px var(--ry),
+    0 0 30px var(--ry),
+    0 0 70px rgba(200,255,0,0.3);
+}
+
+/* Resume button — pixel style */
+.resume-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.58rem;
+  background: transparent;
+  color: var(--rc);
+  border: 3px solid var(--rc);
+  border-radius: 0;
+  box-shadow: 5px 5px 0 var(--rc);
+  transition: all 0.1s ease;
+}
+
+.resume-btn:hover {
+  background: var(--rc);
+  color: var(--rbg);
+  box-shadow: 2px 2px 0 rgba(0,229,255,0.5);
+  transform: translate(3px, 3px);
+}
+
+/* Social icons */
+.resume-social i {
+  background-color: transparent;
+  border: 2px solid var(--rm);
+  border-radius: 0;
+  color: var(--rm);
+  box-shadow: 3px 3px 0 var(--rm);
+  transition: all 0.1s ease;
+}
+
+.resume-social i:hover {
+  background: var(--rm);
+  color: var(--rbg);
+  box-shadow: 1px 1px 0 var(--rm);
+  transform: translate(2px, 2px);
+}
+
+/* ── Section titles ── */
+.skills-title, .projects-title, .competitions-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 1.3rem;
+  letter-spacing: 0.05em;
+  color: var(--ry);
+  text-shadow: 3px 3px 0 rgba(200,255,0,0.2), 0 0 20px rgba(200,255,0,0.35);
+}
+
+/* ── Skills cards ── */
+.skills-box, .tools-box, .languages-box {
+  background-color: var(--rbg2);
+  border: 3px solid var(--rp);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--rp);
+}
+
+.skills-box:hover {
+  background-color: #130028;
+  border-color: var(--rc);
+  box-shadow: 6px 6px 0 var(--rc);
+  transform: translate(-3px, -3px);
+}
+
+.tools-box:hover { transform: translate(-2px, -2px); }
+
+.skills-box h3, .tools-box h3, .languages-box h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  color: var(--rc);
+  text-shadow: 0 0 8px var(--rc);
+  line-height: 2;
+}
+
+.skills-box ul { list-style: none; }
+
+.skills-box ul li {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.58rem;
+  line-height: 2.2;
+  color: #ddd;
+}
+
+.skills-box ul li::before { content: '\25B6 '; color: var(--rm); }
+
+/* Tool icon frames */
+.figma-icon, .nodejs-icon, .microsoft-icon, .canva-icon, .replit-icon {
+  background-color: var(--rbg2);
+  border: 2px solid var(--rp);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--rp);
+}
+
+.tool-item span { font-family: 'Press Start 2P', monospace; font-size: 0.45rem; color: #ccc; }
+.tool-item:hover { transform: translate(-2px, -2px); }
+
+/* 8-bit health bars */
+.fluency-bar {
+  background-color: #180030;
+  border: 2px solid var(--rp);
+  border-radius: 0;
+  height: 12px;
+}
+
+.fluency-fill {
+  background: linear-gradient(90deg, var(--rc), var(--rm));
+  border-radius: 0;
+}
+
+.language-label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: #ccc;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Competitions ── */
+.competitions-subtitle {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.5rem;
+  color: #555;
+  letter-spacing: 0.05em;
+}
+
+.competition-card {
+  background-color: var(--rbg2);
+  border: 3px solid var(--rp);
+  border-radius: 0;
+  box-shadow: 6px 6px 0 var(--rp);
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+
+.competition-card:hover, .competition-card.active {
+  border-color: var(--ry);
+  box-shadow: 6px 6px 0 var(--ry);
+  background-color: #130028;
+  transform: translate(-3px, -3px);
+}
+
+.competition-info h3 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  line-height: 2;
+}
+
+.competition-badge {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.45rem;
+  background: transparent;
+  border: 2px solid var(--ry);
+  color: var(--ry);
+  border-radius: 0;
+  text-shadow: 0 0 6px var(--ry);
+}
+
+.competition-chevron { color: var(--ry); }
+.competition-img { border-radius: 0; border: 2px solid var(--rp); }
+.competition-desc p { color: #bbb; }
+
+.competition-link {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  border-radius: 0;
+  background: transparent;
+  color: var(--rc);
+  border: 2px solid var(--rc);
+  box-shadow: 3px 3px 0 var(--rc);
+  transition: all 0.1s ease;
+}
+
+.competition-link:hover {
+  background: var(--rc);
+  color: var(--rbg);
+  box-shadow: 1px 1px 0 var(--rc);
+  transform: translate(2px, 2px);
+}
+
+.competition-link--github {
+  border-color: var(--rm);
+  color: var(--rm);
+  box-shadow: 3px 3px 0 var(--rm);
+  background: transparent;
+}
+
+.competition-link--github:hover {
+  background: var(--rm);
+  color: var(--rbg);
+  box-shadow: 1px 1px 0 var(--rm);
+}
+
+/* ── Projects carousel ── */
+.carousel-container {
+  border-radius: 0;
+  border: 3px solid var(--rp);
+  box-shadow: 8px 8px 0 var(--rp);
+}
+
+.carousel-right { background-color: var(--rbg2); }
+
+.carousel-right h2 {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.9rem;
+  line-height: 2;
+  color: var(--rc);
+  text-shadow: 0 0 12px var(--rc);
+}
+
+.carousel-right p { color: #bbb; }
+
+.view-more {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  background: transparent;
+  color: var(--ry);
+  border: 2px solid var(--ry);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--ry);
+  width: auto;
+  padding: 0.5rem 1rem;
+  transition: all 0.1s ease;
+}
+
+.view-more:hover {
+  background: var(--ry);
+  color: var(--rbg);
+  box-shadow: 1px 1px 0 var(--ry);
+  transform: translate(3px, 3px);
+}
+
+.carousel-btn {
+  border-radius: 0;
+  background-color: rgba(0,229,255,0.1);
+  border: 2px solid var(--rc);
+  color: var(--rc);
+}
+
+.carousel-btn:hover {
+  background-color: var(--rc);
+  color: var(--rbg);
+  transform: translateY(-50%) scale(1.05);
+}
+
+/* ── Contact ── */
+#contact {
+  background: linear-gradient(180deg, var(--rbg), #1a003a, #2a0050, #3d005e, rgba(255,0,204,0.12));
+}
+
+.contact-title {
+  font-family: 'Press Start 2P', monospace;
+  font-size: clamp(1rem, 3.5vw, 2.5rem);
+  line-height: 2;
+  color: var(--rc);
+  text-shadow: 4px 4px 0 var(--rm), 0 0 30px rgba(0,229,255,0.4);
+}
+
+.contact-title:hover .highlight { color: var(--ry); text-shadow: 0 0 12px var(--ry); }
+
+.form-field label {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  color: var(--rm);
+  text-shadow: 0 0 6px var(--rm);
+  letter-spacing: 0.05em;
+}
+
+.form-input, .form-message {
+  background: var(--rbg2);
+  border: 2px solid var(--rp);
+  border-radius: 0;
+  color: var(--rc);
+  font-size: 0.9rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-input:focus, .form-message:focus {
+  outline: none;
+  border-color: var(--rc);
+  box-shadow: 0 0 0 2px rgba(0,229,255,0.2), 4px 4px 0 var(--rc);
+}
+
+.form-input::placeholder, .form-message::placeholder { color: #333; }
+
+.submit-btn {
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.62rem;
+  background: transparent;
+  color: var(--ry);
+  border: 3px solid var(--ry);
+  border-radius: 0;
+  box-shadow: 5px 5px 0 var(--ry);
+  transition: all 0.1s ease;
+}
+
+.submit-btn:hover {
+  background: var(--ry);
+  color: var(--rbg);
+  box-shadow: 2px 2px 0 var(--ry);
+  transform: translate(3px, 3px);
+}
+
+.submit-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+/* ── Footer ── */
+footer { background-color: var(--rbg); border-top: 3px solid var(--rp); }
+
+.footer-nav a { font-family: 'Press Start 2P', monospace; font-size: 0.5rem; }
+
+.footer-nav a:hover { color: var(--rc); text-shadow: 0 0 8px var(--rc); }
+
+/* ── Star button ── */
+.star-toast {
+  border-radius: 0;
+  border: 3px solid var(--rc);
+  box-shadow: 5px 5px 0 var(--rc);
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.03em;
+}
+
+.star-popup { font-family: 'Press Start 2P', monospace; color: var(--ry); text-shadow: 0 0 6px var(--ry); }
+
+/* ── Mobile ── */
+@media (max-width: 768px) {
+  .name-text         { font-size: 1.1rem; }
+  .intro-text        { font-size: 0.6rem; }
+  .contact-title     { font-size: clamp(0.85rem, 4.5vw, 1.8rem); }
+  .skills-title, .projects-title, .competitions-title { font-size: 1rem; }
+  .carousel-right h2 { font-size: 0.72rem; }
+  .nav-links li a    { font-size: 1rem; }
+}
