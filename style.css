@@ -799,6 +799,26 @@ footer {
   color: #fff;
 }
 
+/* Multiple buttons side by side */
+.competition-links-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+/* Demo video button — teal */
+.competition-link--demo {
+  background-color: #008080;
+  color: #fff;
+}
+
+.competition-link--demo:hover {
+  background-color: #006666;
+  color: #fff;
+  transform: scale(1.04);
+}
+
 /* Mobile: fully stack image above text */
 @media (max-width: 600px) {
   .competition-img {
